@@ -14,7 +14,7 @@ async def record_task():
         await refresh_data(['back_button', 'gild_battle', 'expand_button'])
     screenshot(screenshot_path)
     record_list = recognize_text_to_record_list(screenshot_path)
-    for record in record_list:
+    for record in reversed(record_list):
         report_damage(record)
 
 
@@ -43,7 +43,7 @@ async def game_error_handling():
         button_image = 'back_to_title'
     center = image_to_position(button_image)
     if center is None:
-        warnings.warn('无法解决游戏问题，请检查模拟器')
+        warnings.warn('没有找到需要点击的按键。')
         return
     click(center[0], center[1])
     await asyncio.sleep(5)
@@ -77,7 +77,7 @@ def connect():
 def screenshot(relative_path: str):
     path = os.path.abspath('.') + '/' + relative_path
     os.system('adb shell screencap /data/screen.png')
-    os.system('adb pull /data/screen.png %s' % path)
+    os.system('adb pull /data/screen.png "%s"' % path)
 
 
 # if __name__ == '__main__':
