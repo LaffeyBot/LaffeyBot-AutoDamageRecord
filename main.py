@@ -4,16 +4,17 @@ from scheduler import record_task
 import config
 import logging
 import asyncio
+from report.login import login
 
 scheduler = AsyncIOScheduler()
-# header =
+header = login(config.USERNAME, config.PASSWORD)
 
 
 @scheduler.scheduled_job('interval', seconds=config.FETCH_INTERVAL)
 async def scheduled():
     log.log(1, '开始任务')
     if do_fetch():
-        await record_task()
+        await record_task(header=header)
 
 
 log = logging.getLogger('apscheduler.executors.default')
