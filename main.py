@@ -8,6 +8,7 @@ from report.login import login
 
 scheduler = AsyncIOScheduler()
 header = login(config.USERNAME, config.PASSWORD)
+is_loading = True
 
 
 @scheduler.scheduled_job('interval', seconds=config.FETCH_INTERVAL)

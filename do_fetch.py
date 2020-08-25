@@ -1,9 +1,14 @@
 import requests
-import config
+from config import Config
 
 
-def do_fetch() -> bool:
-    return True
-    # url = config.BASE_URL + 'fetch_status?group_id=' + config.GROUP_ID
-    # result = requests.get(url).text
-    # return result == 'True'
+def do_fetch(header: dict) -> bool:
+    url = Config().BASE_URL + '/v1/user/get_ocr_status'
+    result = requests.get(url, headers=header).text
+    return result == 'True'
+
+
+def stop_fetch(header: dict):
+    url = Config().BASE_URL + '/v1/user/get_ocr_status'
+    json = dict(status=False)
+    requests.post(url, headers=header, json=json)
