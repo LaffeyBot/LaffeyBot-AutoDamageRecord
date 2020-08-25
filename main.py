@@ -11,7 +11,7 @@ import os
 
 scheduler = AsyncIOScheduler()
 header = login(config.USERNAME, config.PASSWORD)
-print(os.path.dirname(os.path.realpath(__file__)).replace('\\', '/'))
+is_loading = True
 
 
 @scheduler.scheduled_job('interval', seconds=config.FETCH_INTERVAL)
