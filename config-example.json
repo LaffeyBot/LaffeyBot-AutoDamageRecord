@@ -1,0 +1,6 @@
+{
+  "BASE_URL": "http://s.dd.works:5555/",
+  "USERNAME": "",
+  "PASSWORD": "",
+  "FETCH_INTERVAL": 30
+}
