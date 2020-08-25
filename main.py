@@ -6,6 +6,9 @@ import logging
 import asyncio
 from report.login import login
 from scheduler import load_all
+import apscheduler
+import pytesseract
+import os
 
 scheduler = AsyncIOScheduler()
 header = login(config.USERNAME, config.PASSWORD)
