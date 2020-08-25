@@ -65,8 +65,8 @@ def recognize_text_to_record_list(img_path: str, crop: (float, float, float, flo
 
 
 def recognize_text(img_path) -> str:
-    pytesseract.pytesseract.tesseract_cmd = 'C:/Program Files (x86)/Tesseract-OCR/tesseract.exe'
-    tessdata_dir_config = '--tessdata-dir "C:/Program Files (x86)/Tesseract-OCR/tessdata"'
+    pytesseract.pytesseract.tesseract_cmd = 'C:/Program Files/Tesseract-OCR/tesseract.exe'
+    tessdata_dir_config = '--tessdata-dir "C:/Program Files/Tesseract-OCR/tessdata"'
     img = Image.open(img_path)
     return pytesseract.image_to_string(img, lang='chi_sim', config=tessdata_dir_config)
 
