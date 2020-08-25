@@ -5,15 +5,21 @@ import config
 import logging
 import asyncio
 from report.login import login
+from scheduler import load_all
 
 scheduler = AsyncIOScheduler()
 header = login(config.USERNAME, config.PASSWORD)
+global is_loading
 is_loading = True
 
 
 @scheduler.scheduled_job('interval', seconds=config.FETCH_INTERVAL)
 async def scheduled():
     log.log(1, '开始任务')
+    if is_loading and do_fetch():
+        await load_all(header=header)
+        is_loading = False
+        return
     if do_fetch():
         await record_task(header=header)
 

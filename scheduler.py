@@ -8,13 +8,30 @@ from do_fetch import stop_fetch
 
 
 async def record_task(header: dict):
-    screenshot_path = 'screenshots/screen.png'
     connect()
     await refresh_data(['back_button', 'gild_battle', 'expand_button'], header=header)
+    record_and_report_current(header=header)
+
+
+def record_and_report_current(header: dict):
+    screenshot_path = 'screenshots/screen.png'
     screenshot(screenshot_path)
     record_list = recognize_text_to_record_list(screenshot_path)
     for record in reversed(record_list):
         report_damage(record, auth_header=header)
+
+
+async def load_all(header: dict):
+    x = 1300
+    for _ in range(7):
+        swipe(x, 650, x, 300)
+        await asyncio.sleep(2)
+
+    for _ in range(20):
+        swipe(x, 350, x, 500)
+        await asyncio.sleep(2)
+        record_and_report_current(header=header)
+
 
 
 async def refresh_data(images: list, header: dict):
