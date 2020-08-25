@@ -5,9 +5,13 @@ import config
 import logging
 import asyncio
 from report.login import login
+import apscheduler
+import pytesseract
+import os
 
 scheduler = AsyncIOScheduler()
 header = login(config.USERNAME, config.PASSWORD)
+print(os.path.dirname(os.path.realpath(__file__)).replace('\\', '/'))
 
 
 @scheduler.scheduled_job('interval', seconds=config.FETCH_INTERVAL)
